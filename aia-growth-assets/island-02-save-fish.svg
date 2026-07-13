@@ -1,0 +1,10 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<defs><filter id="rough"><feTurbulence baseFrequency="0.014" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/></filter></defs>
+<rect width="900" height="560" fill="#f8faf9"/><path d="M0 405 Q190 345 370 400 T730 390 T900 395 V560 H0Z" fill="#d9c18b" stroke="#17212b" stroke-width="5" filter="url(#rough)"/>
+<circle cx="700" cy="98" r="52" fill="#f2b84b" stroke="#17212b" stroke-width="4"/>
+<g transform="translate(100 220)" filter="url(#rough)"><path d="M0 45 Q60 0 130 45 Q60 90 0 45 L-42 80 L-42 10Z" fill="#e9f2f4" stroke="#17212b" stroke-width="5"/><circle cx="90" cy="42" r="6" fill="#17212b"/><text x="45" y="130" font-family="Microsoft YaHei" font-size="23" fill="#66727d">今天吃掉</text></g>
+<g transform="translate(435 205)" filter="url(#rough)"><path d="M0 45 Q60 0 130 45 Q60 90 0 45 L-42 80 L-42 10Z" fill="#ffe1e7" stroke="#d7193f" stroke-width="6"/><circle cx="90" cy="42" r="6" fill="#17212b"/><path d="M-55 115 Q60 150 175 115 L150 230 L-25 230Z" fill="none" stroke="#17212b" stroke-width="5" stroke-dasharray="13 8"/><text x="60" y="278" text-anchor="middle" font-family="Microsoft YaHei" font-size="25" font-weight="700" fill="#d7193f">存下一条鱼</text></g>
+<path d="M360 110 C430 75 520 75 590 110" fill="none" stroke="#d7193f" stroke-width="5" stroke-dasharray="12 8" filter="url(#rough)"/><path d="M575 98 L600 111 L578 126" fill="none" stroke="#d7193f" stroke-width="5"/>
+<text x="70" y="78" font-family="Microsoft YaHei,sans-serif" font-size="40" font-weight="700" fill="#17212b">有了剩余，才有投资未来的本钱</text>
+<g transform="translate(650 405)"><rect width="190" height="88" rx="8" fill="#fff" stroke="#d7193f" stroke-width="4"/><text x="95" y="37" text-anchor="middle" font-family="Microsoft YaHei" font-size="24" font-weight="700" fill="#d7193f">3个月 DA</text><text x="95" y="68" text-anchor="middle" font-family="Microsoft YaHei" font-size="19" fill="#66727d">形成经营余量</text></g>
+</svg>

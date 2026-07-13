@@ -1,0 +1,11 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<defs><filter id="rough"><feTurbulence baseFrequency="0.011" numOctaves="2" seed="13" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></defs>
+<rect width="900" height="560" fill="#f8faf9"/><path d="M0 410 Q180 350 360 405 T710 395 T900 390 V560 H0Z" fill="#d9c18b" stroke="#17212b" stroke-width="5" filter="url(#rough)"/>
+<path d="M380 170 Q520 60 690 170 L650 365 Q520 425 410 355Z" fill="none" stroke="#d7193f" stroke-width="7" stroke-dasharray="15 9" filter="url(#rough)"/>
+<path d="M415 195 L650 345 M455 145 L670 300 M505 112 L682 250 M375 245 L620 382 M390 350 L675 170 M410 285 L640 135 M455 385 L690 220" stroke="#d7193f" stroke-width="3" opacity=".7"/>
+<g fill="#e9f2f4" stroke="#17212b" stroke-width="4" filter="url(#rough)"><path d="M450 230 q45-35 90 0 q-45 35-90 0 l-30 22 v-44z"/><path d="M535 285 q45-35 90 0 q-45 35-90 0 l-30 22 v-44z"/><path d="M470 330 q45-35 90 0 q-45 35-90 0 l-30 22 v-44z"/></g>
+<circle cx="235" cy="250" r="32" fill="#fff" stroke="#17212b" stroke-width="6"/><path d="M235 282 L235 370 M235 300 L180 335 M235 300 L300 320 M235 370 L195 420 M235 370 L275 420" fill="none" stroke="#17212b" stroke-width="9" stroke-linecap="round" filter="url(#rough)"/>
+<text x="65" y="76" font-family="Microsoft YaHei,sans-serif" font-size="40" font-weight="700" fill="#17212b">渔网不是收入，而是提高生产力的工具</text>
+<text x="65" y="125" font-family="Microsoft YaHei,sans-serif" font-size="24" fill="#66727d">训练 + 工具 + 客户经营，让一天一条鱼变成一天多条鱼</text>
+<g transform="translate(645 425)"><rect width="200" height="88" rx="8" fill="#fff" stroke="#d7193f" stroke-width="4"/><text x="100" y="37" text-anchor="middle" font-family="Microsoft YaHei" font-size="24" font-weight="700" fill="#d7193f">6个月 AL</text><text x="100" y="68" text-anchor="middle" font-family="Microsoft YaHei" font-size="19" fill="#66727d">开始复制方法</text></g>
+</svg>

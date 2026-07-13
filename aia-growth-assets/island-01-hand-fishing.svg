@@ -1,0 +1,12 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<defs><filter id="rough"><feTurbulence baseFrequency="0.012" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2"/></filter></defs>
+<rect width="900" height="560" fill="#f8faf9"/><path d="M0 390 Q170 340 340 385 T690 380 T900 370 V560 H0Z" fill="#d9c18b" stroke="#17212b" stroke-width="5" filter="url(#rough)"/>
+<path d="M0 390 Q170 340 340 385 T690 380 T900 370" fill="none" stroke="#17212b" stroke-width="5" filter="url(#rough)"/>
+<circle cx="760" cy="105" r="55" fill="#f2b84b" stroke="#17212b" stroke-width="4"/>
+<circle cx="330" cy="230" r="34" fill="#fff" stroke="#17212b" stroke-width="6"/><path d="M328 265 L315 350 M329 285 L270 320 M330 288 L390 315 M315 350 L270 392 M315 350 L360 392" fill="none" stroke="#17212b" stroke-width="9" stroke-linecap="round" filter="url(#rough)"/>
+<path d="M235 245 Q165 225 120 270 Q165 315 235 295 L270 330 L270 210Z" fill="#e9f2f4" stroke="#d7193f" stroke-width="6" filter="url(#rough)"/><circle cx="152" cy="270" r="7" fill="#17212b"/>
+<path d="M405 315 C475 270 550 270 620 315" fill="none" stroke="#66727d" stroke-width="5" stroke-dasharray="12 10"/>
+<text x="80" y="90" font-family="Microsoft YaHei,sans-serif" font-size="40" font-weight="700" fill="#17212b">徒手捕鱼：一天只能换来一天的鱼</text>
+<text x="80" y="145" font-family="Microsoft YaHei,sans-serif" font-size="25" fill="#66727d">停止工作，收入也随之停止</text>
+<g transform="translate(635 405)"><rect width="190" height="88" rx="8" fill="#fff" stroke="#d7193f" stroke-width="4"/><text x="95" y="38" text-anchor="middle" font-family="Microsoft YaHei" font-size="24" font-weight="700" fill="#d7193f">个人FYC</text><text x="95" y="70" text-anchor="middle" font-family="Microsoft YaHei" font-size="19" fill="#66727d">解决当期生存</text></g>
+</svg>
