@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101a24" />
+  <meta name="description" content="《越过百年再望前》友邦保险对外分享演示稿，2026 更新版。" />
+  <title>越过百年再望前｜2026 分享版</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1118;
+      --panel: rgba(20, 29, 39, 0.86);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #f5f7fa;
+      --muted: #9ca8b5;
+      --red: #e31845;
+      --stage-pad: clamp(12px, 2.6vw, 34px);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+    }
+
+    button, a { font: inherit; }
+
+    .app {
+      display: grid;
+      grid-template-rows: 58px minmax(0, 1fr) 54px;
+      width: 100%;
+      height: 100dvh;
+      background:
+        radial-gradient(circle at 50% -20%, rgba(227, 24, 69, 0.13), transparent 42%),
+        linear-gradient(180deg, #101923 0%, #090e14 100%);
+    }
+
+    .topbar, .bottombar {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 max(18px, env(safe-area-inset-left));
+      background: var(--panel);
+      border-color: var(--line);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar { border-bottom: 1px solid var(--line); }
+    .bottombar { border-top: 1px solid var(--line); justify-content: center; }
+
+    .brand {
+      display: flex;
+      flex: 1 1 auto;
+      min-width: 0;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 8px;
+      height: 26px;
+      flex: 0 0 auto;
+      background: var(--red);
+    }
+
+    .brand h1 {
+      min-width: 0;
+      margin: 0;
+      overflow: hidden;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .brand span { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .top-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; margin-left: auto; }
+
+    .action, .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 36px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--text);
+      background: rgba(255,255,255,.04);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .18s ease, border-color .18s ease, transform .18s ease;
+    }
+
+    .action:hover, .nav-btn:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    .action:active, .nav-btn:active { transform: translateY(1px); }
+    .action.primary { border-color: var(--red); background: var(--red); }
+    .action.primary:hover { background: #c9143c; }
+
+    .stage-wrap {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      padding: var(--stage-pad);
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .stage {
+      position: relative;
+      width: min(100%, calc((100dvh - 112px - 2 * var(--stage-pad)) * 16 / 9));
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 26px 70px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .slide {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 1;
+      transition: opacity .16s ease;
+      pointer-events: none;
+    }
+
+    .slide.loading { opacity: 1; }
+
+    .click-zone {
+      position: absolute;
+      z-index: 4;
+      top: 0;
+      bottom: 0;
+      width: 36%;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .click-zone.prev { left: 0; cursor: w-resize; }
+    .click-zone.next { right: 0; cursor: e-resize; }
+
+    .hint {
+      position: absolute;
+      z-index: 8;
+      right: 18px;
+      bottom: 14px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 4px;
+      color: rgba(255,255,255,.76);
+      background: rgba(10,15,21,.72);
+      font-size: 12px;
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity .2s ease;
+      pointer-events: none;
+    }
+
+    .stage:hover .hint { opacity: 1; }
+
+    .nav-btn { width: 42px; padding: 0; font-size: 20px; }
+    .nav-btn:disabled { opacity: .32; cursor: default; }
+    .counter { min-width: 76px; color: var(--muted); text-align: center; font-variant-numeric: tabular-nums; }
+    .counter strong { color: var(--text); font-weight: 700; }
+
+    .progress {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .progress > span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: var(--red);
+      transition: width .22s ease;
+    }
+
+    .shortcut { position: absolute; right: max(18px, env(safe-area-inset-right)); color: var(--muted); font-size: 12px; }
+
+    .app:fullscreen { background: #05080c; }
+    .app:fullscreen .topbar { display: none; }
+    .app:fullscreen { grid-template-rows: minmax(0,1fr) 48px; }
+    .app:fullscreen .stage { width: min(100%, calc((100dvh - 48px - 2 * var(--stage-pad)) * 16 / 9)); }
+
+    @media (max-width: 680px) {
+      .app { grid-template-rows: 52px minmax(0,1fr) 50px; }
+      .topbar { padding-inline: 12px; }
+      .brand span, .shortcut, .action .label { display: none; }
+      .brand h1 { max-width: 142px; font-size: 15px; }
+      .action { min-width: 38px; height: 34px; padding: 0 10px; }
+      .stage { width: calc(100vw - 20px); max-width: calc(100vw - 20px); }
+      .stage-wrap { padding: 10px; }
+      .hint { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <h1>越过百年再望前</h1>
+        <span>2026 对外分享版 · 19 页</span>
+      </div>
+      <div class="top-actions">
+        <button class="action" id="fullscreenBtn" type="button" title="全屏播放" aria-label="全屏播放">⛶ <span class="label">全屏</span></button>
+        <a class="action primary" href="century-forward-2026.pptx" download>↓ <span class="label">下载 PPTX</span></a>
+      </div>
+    </header>
+
+    <section class="stage-wrap" id="stageWrap" aria-label="演示文稿播放区域">
+      <div class="stage">
+        <img class="slide" id="slideImage" src="slides/slide-01.png" alt="第 1 页：越过百年再望前" draggable="false" />
+        <button class="click-zone prev" id="prevZone" type="button" aria-label="上一页"></button>
+        <button class="click-zone next" id="nextZone" type="button" aria-label="下一页"></button>
+        <div class="hint">点击两侧翻页 · 方向键 / 空格 · 手机左右滑动</div>
+      </div>
+    </section>
+
+    <footer class="bottombar">
+      <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+      <button class="nav-btn" id="prevBtn" type="button" aria-label="上一页">‹</button>
+      <div class="counter" aria-live="polite"><strong id="currentPage">1</strong> / <span id="totalPages">19</span></div>
+      <button class="nav-btn" id="nextBtn" type="button" aria-label="下一页">›</button>
+      <div class="shortcut">← → 翻页　F 全屏　Esc 退出</div>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const total = 19;
+      const titles = [
+        '越过百年再望前', '今晚，我们只回答三个问题', '为什么百年公司仍值得重新认识',
+        '一家公司的百年，不只是时间', '跨越周期，靠的是持续兑现承诺', '2025：增长继续加速',
+        '集团增长的两大支点：香港成熟，大陆扩张', '中国大陆市场仍在扩容', '专业建议的价值正在上升',
+        '加入百年平台，你获得什么', '友邦的职业路径，不止是一份销售工作', '从个人专业到团队经营',
+        '新人补贴的作用，是让起步阶段更可持续', '职级向上，收入曲线在主管阶段明显抬升',
+        '什么样的人更适合加入', '把兴趣变成一次认真了解', '越过百年，再望向前', '关键指标口径', '资料来源'
+      ];
+      const app = document.getElementById('app');
+      const image = document.getElementById('slideImage');
+      const currentPage = document.getElementById('currentPage');
+      const progressBar = document.getElementById('progressBar');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      let page = Math.max(1, Math.min(total, Number(location.hash.slice(1)) || 1));
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      const srcFor = n => `slides/slide-${String(n).padStart(2, '0')}.png`;
+
+      function preload(n) {
+        if (n < 1 || n > total) return;
+        const img = new Image();
+        img.src = srcFor(n);
+      }
+
+      function render(pushHash = true) {
+        image.classList.add('loading');
+        image.src = srcFor(page);
+        image.alt = `第 ${page} 页：${titles[page - 1]}`;
+        currentPage.textContent = page;
+        progressBar.style.width = `${page / total * 100}%`;
+        prevBtn.disabled = page === 1;
+        nextBtn.disabled = page === total;
+        document.title = `${titles[page - 1]}｜越过百年再望前`;
+        if (pushHash) history.replaceState(null, '', `#${page}`);
+        preload(page - 1);
+        preload(page + 1);
+      }
+
+      function go(delta) {
+        const next = Math.max(1, Math.min(total, page + delta));
+        if (next === page) return;
+        page = next;
+        render();
+      }
+
+      image.addEventListener('load', () => image.classList.remove('loading'));
+      prevBtn.addEventListener('click', () => go(-1));
+      nextBtn.addEventListener('click', () => go(1));
+      document.getElementById('prevZone').addEventListener('click', () => go(-1));
+      document.getElementById('nextZone').addEventListener('click', () => go(1));
+
+      document.getElementById('fullscreenBtn').addEventListener('click', async () => {
+        try {
+          if (!document.fullscreenElement) await app.requestFullscreen();
+          else await document.exitFullscreen();
+        } catch (_) {}
+      });
+
+      document.addEventListener('keydown', event => {
+        if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(event.key)) { event.preventDefault(); go(1); }
+        if (['ArrowLeft', 'PageUp', 'Backspace'].includes(event.key)) { event.preventDefault(); go(-1); }
+        if (event.key === 'Home') { page = 1; render(); }
+        if (event.key === 'End') { page = total; render(); }
+        if (event.key.toLowerCase() === 'f') document.getElementById('fullscreenBtn').click();
+      });
+
+      document.getElementById('stageWrap').addEventListener('touchstart', event => {
+        const touch = event.changedTouches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      }, { passive: true });
+
+      document.getElementById('stageWrap').addEventListener('touchend', event => {
+        const touch = event.changedTouches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) go(dx < 0 ? 1 : -1);
+      }, { passive: true });
+
+      window.addEventListener('hashchange', () => {
+        const requested = Number(location.hash.slice(1));
+        if (Number.isInteger(requested) && requested >= 1 && requested <= total) {
+          page = requested;
+          render(false);
+        }
+      });
+
+      render(false);
+    })();
+  </script>
+</body>
+</html>
